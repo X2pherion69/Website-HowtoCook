@@ -1,17 +1,63 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kocima | Cooking Recipe HTML Template</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Leckerli+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/uikit.js"></script>
+</head>
+
+<body>
+
+
+    <div class="uk-section uk-section-default uk-padding-remove-top">
+        <div class="uk-container">
+            <div class="uk-grid-large" data-uk-grid>
+                <div class="uk-width-1-2@m uk-flex uk-flex-middle">
+                    <div>
+                        <h1 class="uk-margin-bottom">Chào mọi người đến với website dạy nấu ăn</h1>
+                        <p>
+                            Ông bà ta có câu: "Có thực mới vực được đạo". Giới trẻ ngày nay cũng nói rằng: "Con đường ngắn nhất để đi tới trái tim là qua dạ dày". Vậy mới thấy đồ ăn ngon luôn là phép màu kỳ diệu gắn kết con người! Nếu bạn còn đang băn khoăn và hoài nghi về tài nấu nướng của mình thì hãy tới với HomeRecipes
+                        </p>
+                        <p>Mọi chi tiết về website xin vui lòng liên hệ:</p>
+                        <p>Lương Quang Pháp - 18DTHB2</p>
+                        <p>SDT: 0394191274</p>
+                        <p>Email: phapbro233@gmail.com</p>
+
+                        <div class="uk-flex uk-flex-middle uk-flex-left@s">
+                            <div data-uk-grid class="uk-child-width-auto uk-grid-small">
+                                <div>
+                                    <a href="https://www.facebook.com/Quang.Phap.233" data-uk-icon="icon: facebook; ratio: 0.8" class="uk-icon-button facebook" target="_blank"></a>
+                                </div>
+                                <div>
+                                    <a href="https://www.instagram.com/" data-uk-icon="icon: instagram; ratio: 0.8" class="uk-icon-button instagram" target="_blank"></a>
+                                </div>
+                                <div>
+                                    <a href="mailto:info@blacompany.com" data-uk-icon="icon: twitter; ratio: 0.8" class="uk-icon-button twitter" target="_blank"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-2@m">
+                    <img src="~/Content/img/mon-ngon-moi-ngay.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
