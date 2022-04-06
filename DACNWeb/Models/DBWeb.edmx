@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DACNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryFood">
+          <Key>
+            <PropertyRef Name="IDTheLoai" />
+          </Key>
+          <Property Name="IDTheLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTheLoai" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CookingMethod">
+          <Key>
+            <PropertyRef Name="IDMethod" />
+          </Key>
+          <Property Name="IDMethod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPPN" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="IDFood" />
+            <PropertyRef Name="IDNguyenLieu" />
+          </Key>
+          <Property Name="IDFood" Type="int" Nullable="false" />
+          <Property Name="IDNguyenLieu" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="IDFood" />
+          </Key>
+          <Property Name="IDFood" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDTheLoai" Type="int" />
+          <Property Name="IDMethod" Type="int" />
+          <Property Name="TenMonAn" Type="nvarchar" MaxLength="200" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="ActiveTime" Type="int" />
+          <Property Name="TotalTime" Type="int" />
+          <Property Name="Yield" Type="int" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="IDNguyenLieu" />
+          </Key>
+          <Property Name="IDNguyenLieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNL" Type="nvarchar" MaxLength="100" />
+          <Property Name="DonVi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReaderID" Type="int" />
+          <Property Name="IDFood" Type="int" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Vote" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Detail_Food">
+          <End Role="Food" Type="Self.Food" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="IDFood" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IDFood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDNguyenLieu" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IDNguyenLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_CategoryFood">
+          <End Role="CategoryFood" Type="Self.CategoryFood" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryFood">
+              <PropertyRef Name="IDTheLoai" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="IDTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_CookingMethod">
+          <End Role="CookingMethod" Type="Self.CookingMethod" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CookingMethod">
+              <PropertyRef Name="IDMethod" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="IDMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DACNModelStoreContainer">
+          <EntitySet Name="CategoryFood" EntityType="Self.CategoryFood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CookingMethod" EntityType="Self.CookingMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Detail_Food" Association="Self.FK_Detail_Food">
+            <End Role="Food" EntitySet="Food" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_Material" Association="Self.FK_Detail_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_CategoryFood" Association="Self.FK_Food_CategoryFood">
+            <End Role="CategoryFood" EntitySet="CategoryFood" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_CookingMethod" Association="Self.FK_Food_CookingMethod">
+            <End Role="CookingMethod" EntitySet="CookingMethod" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_User" Association="Self.FK_Food_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="Self.FK_Rating_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DACNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoryFood">
+          <Key>
+            <PropertyRef Name="IDTheLoai" />
+          </Key>
+          <Property Name="IDTheLoai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTheLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK_Food_CategoryFood" FromRole="CategoryFood" ToRole="Food" />
+        </EntityType>
+        <EntityType Name="CookingMethod">
+          <Key>
+            <PropertyRef Name="IDMethod" />
+          </Key>
+          <Property Name="IDMethod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPPN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK_Food_CookingMethod" FromRole="CookingMethod" ToRole="Food" />
+        </EntityType>
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="IDFood" />
+            <PropertyRef Name="IDNguyenLieu" />
+          </Key>
+          <Property Name="IDFood" Type="Int32" Nullable="false" />
+          <Property Name="IDNguyenLieu" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Food" Relationship="Self.FK_Detail_Food" FromRole="Detail" ToRole="Food" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_Detail_Material" FromRole="Detail" ToRole="Material" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="IDFood" />
+          </Key>
+          <Property Name="IDFood" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTheLoai" Type="Int32" />
+          <Property Name="IDMethod" Type="Int32" />
+          <Property Name="TenMonAn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveTime" Type="Int32" />
+          <Property Name="TotalTime" Type="Int32" />
+          <Property Name="Yield" Type="Int32" />
+          <NavigationProperty Name="CategoryFood" Relationship="Self.FK_Food_CategoryFood" FromRole="Food" ToRole="CategoryFood" />
+          <NavigationProperty Name="CookingMethod" Relationship="Self.FK_Food_CookingMethod" FromRole="Food" ToRole="CookingMethod" />
+          <NavigationProperty Name="Details" Relationship="Self.FK_Detail_Food" FromRole="Food" ToRole="Detail" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Food_User" FromRole="Food" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="IDNguyenLieu" />
+          </Key>
+          <Property Name="IDNguyenLieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Details" Relationship="Self.FK_Detail_Material" FromRole="Material" ToRole="Detail" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReaderID" Type="Int32" />
+          <Property Name="IDFood" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vote" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Rating_User" FromRole="Rating" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK_Food_User" FromRole="User" ToRole="Food" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_Rating_User" FromRole="User" ToRole="Rating" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Food_CategoryFood">
+          <End Role="CategoryFood" Type="Self.CategoryFood" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryFood">
+              <PropertyRef Name="IDTheLoai" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="IDTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_CookingMethod">
+          <End Role="CookingMethod" Type="Self.CookingMethod" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CookingMethod">
+              <PropertyRef Name="IDMethod" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="IDMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_Food">
+          <End Role="Food" Type="Self.Food" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="IDFood" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IDFood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDNguyenLieu" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IDNguyenLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DACNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryFoods" EntityType="Self.CategoryFood" />
+          <EntitySet Name="CookingMethods" EntityType="Self.CookingMethod" />
+          <EntitySet Name="Details" EntityType="Self.Detail" />
+          <EntitySet Name="Foods" EntityType="Self.Food" />
+          <EntitySet Name="Materials" EntityType="Self.Material" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Food_CategoryFood" Association="Self.FK_Food_CategoryFood">
+            <End Role="CategoryFood" EntitySet="CategoryFoods" />
+            <End Role="Food" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_CookingMethod" Association="Self.FK_Food_CookingMethod">
+            <End Role="CookingMethod" EntitySet="CookingMethods" />
+            <End Role="Food" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_Food" Association="Self.FK_Detail_Food">
+            <End Role="Food" EntitySet="Foods" />
+            <End Role="Detail" EntitySet="Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_Material" Association="Self.FK_Detail_Material">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="Detail" EntitySet="Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_User" Association="Self.FK_Food_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Food" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="Self.FK_Rating_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DACNModelStoreContainer" CdmEntityContainer="DACNEntities">
+          <EntitySetMapping Name="CategoryFoods">
+            <EntityTypeMapping TypeName="DACNModel.CategoryFood">
+              <MappingFragment StoreEntitySet="CategoryFood">
+                <ScalarProperty Name="IDTheLoai" ColumnName="IDTheLoai" />
+                <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CookingMethods">
+            <EntityTypeMapping TypeName="DACNModel.CookingMethod">
+              <MappingFragment StoreEntitySet="CookingMethod">
+                <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+                <ScalarProperty Name="TenPPN" ColumnName="TenPPN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Details">
+            <EntityTypeMapping TypeName="DACNModel.Detail">
+              <MappingFragment StoreEntitySet="Detail">
+                <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+                <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foods">
+            <EntityTypeMapping TypeName="DACNModel.Food">
+              <MappingFragment StoreEntitySet="Food">
+                <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+                <ScalarProperty Name="IDTheLoai" ColumnName="IDTheLoai" />
+                <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+                <ScalarProperty Name="TenMonAn" ColumnName="TenMonAn" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="ActiveTime" ColumnName="ActiveTime" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+                <ScalarProperty Name="Yield" ColumnName="Yield" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="DACNModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+                <ScalarProperty Name="TenNL" ColumnName="TenNL" />
+                <ScalarProperty Name="DonVi" ColumnName="DonVi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="DACNModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DACNModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DACNModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c037e88fc84431e90dbcf2b776c03e8" Name="Diagram1">
+        <EntityTypeShape EntityType="DACNModel.CategoryFood" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.CookingMethod" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.Detail" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.Food" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.Material" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.Rating" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.Role" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DACNModel.User" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="DACNModel.FK_Food_CategoryFood" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_Food_CookingMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_Detail_Food" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_Detail_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_Food_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_Rating_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DACNModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
