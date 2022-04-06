@@ -14,9 +14,9 @@ namespace DACNWeb.Models
     
     public partial class Detail
     {
-        public int IDFood { get; set; }
-        public int IDNguyenLieu { get; set; }
         public string SoLuong { get; set; }
+        public int IDNguyenLieu { get; set; }
+        public int IDFood { get; set; }
     
         public virtual Food Food { get; set; }
         public virtual Material Material { get; set; }
