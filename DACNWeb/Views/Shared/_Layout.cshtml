@@ -1,42 +1,93 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en-gb" dir="ltr">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HomeRecipes | Ẩm thực Việt</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Leckerli+One&display=swap" rel="stylesheet">
+    <script src="~/Content/js/uikit.js"></script>
+    <link href="~/Content/css/main.css" rel="stylesheet" />
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <nav class="uk-navbar-container uk-letter-spacing-small">
+        <div class="uk-container">
+            <div class="uk-position-z-index" data-uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="/">HomeRecipes</a>
+                    <ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    
+                    
+                    <a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas" data-uk-toggle>
+                        <span data-uk-navbar-toggle-icon></span>
+                    </a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div>
+    </nav>
+    @RenderBody();
+    <footer class="uk-section uk-section-default">
+        <div class="uk-container uk-text-secondary uk-text-500">
+            <div class="uk-child-width-1-2@s" data-uk-grid>
+                <div>
+                    <a href="#" class="uk-logo">Recipes</a>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-right@s">
+                    <div data-uk-grid class="uk-child-width-auto uk-grid-small">
+                        <div>
+                            <a href="https://www.facebook.com/Quang.Phap.233" data-uk-icon="icon: facebook; ratio: 0.8" class="uk-icon-button facebook" target="_blank"></a>
+                        </div>
+                        <div>
+                            <a href="https://www.instagram.com/" data-uk-icon="icon: instagram; ratio: 0.8" class="uk-icon-button instagram" target="_blank"></a>
+                        </div>
+                        <div>
+                            <a href="mailto:info@blacompany.com" data-uk-icon="icon: twitter; ratio: 0.8" class="uk-icon-button twitter" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-margin-medium-top uk-text-small uk-text-muted">
+                <div>Made by a <a class="uk-link-muted" href="https://www.facebook.com/Quang.Phap.233" target="_blank">QuangPhap</a> in Binh Thuan Province.</div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="offcanvas" data-uk-offcanvas="flip: true; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <a class="uk-logo" href="">RecipesHome</a>
+            <button class="uk-offcanvas-close" type="button" data-uk-close="ratio: 1.2"></button>
+            <ul class="uk-nav uk-nav-primary uk-nav-offcanvas uk-margin-medium-top uk-text-center">
+                <li class="uk-active">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <div class="uk-margin-medium-top uk-text-center">
+                <div data-uk-grid class="uk-child-width-auto uk-grid-small uk-flex-center">
+                    <div>
+                        <a href="https://twitter.com/" data-uk-icon="icon: twitter" class="uk-icon-link" target="_blank"></a>
+                    </div>
+                    <div>
+                        <a href="https://www.facebook.com/Quang.Phap.233" data-uk-icon="icon: facebook" class="uk-icon-link" target="_blank"></a>
+                    </div>
+                    <div>
+                        <a href="https://www.instagram.com/" data-uk-icon="icon: instagram" class="uk-icon-link" target="_blank"></a>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
+
 </html>
