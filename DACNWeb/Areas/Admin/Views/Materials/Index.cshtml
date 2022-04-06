@@ -1,0 +1,114 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DACNWeb.Models.Material>
+
+@*@model IEnumerable<DACNWeb.Models.Material>*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <section class="content my-2">
+
+        
+
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong class="text-danger text-uppercase">Nguyên Liệu</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="@Url.Action("Create","Materials")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i>  Create</a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-12">
+                <div class="card">
+                    <div style="padding: 0.75rem 1.25rem;">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                @using (Html.BeginForm("Index", "Materials", FormMethod.Get, new { enctype = "multipart/form-data" }))
+                                {
+                                    <label style="display:inline-block;font-weight:normal;">
+                                        Tìm theo tên món ăn:
+                                        <input name="Search" type="search" value="@(ViewBag.Search as string)" class="form-control">
+                                    </label>
+                                    <label style="display:inline-block;font-weight:normal;">
+                                        <input style="margin-top:-4.4px" class="btn btn-info" type="submit" value="Tìm kiếm" />
+                                    </label>}
+
+                            </div>
+                            <div class="col-md-1">
+                                <br />
+                                <a href="@Url.Action("Index","Materials")" style="font-size: 14px;font-weight: normal;" class="badge badge-danger">RESET bộ lọc</a>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <p><br />Sắp xếp theo: @Html.ActionLink("Tên nguyên liệu", "Index", new { sortMate = ViewBag.NameSortParm })</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="myTable" class="table table-bordered table-hover">
+                    @*<table id ="myTable"class="table table-bordered table-striped">*@
+                    <thead>
+                        <tr class="text-center colorChooser">
+                            <th width="40%">
+                                Tên Nguyên Liệu
+                            </th>
+                            <th width="20%">
+                                Đơn vị
+                            </th>
+                            <th width="40%">
+                                Chức Năng
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-center">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenNL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DonVi)
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IDNguyenLieu }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDNguyenLieu })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+                    Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortMate = ViewBag.CurrentSort, size = ViewBag.currentSize }))
+            </div>
+            <!-- /.card-body -->
+            @*<div class="card-footer">
+            Footer
+        </div>*@
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<link href="~/Content/PagedList.css" rel="stylesheet" />

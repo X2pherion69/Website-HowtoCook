@@ -1,0 +1,112 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DACNWeb.Models.Food>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content my-2">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="col-12">
+                <div class="card">
+                    <div style="padding: 0.75rem 1.25rem;">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                @using (Html.BeginForm("Index", "Foods", FormMethod.Get, new { enctype = "multipart/form-data" }))
+                                {
+                                    <label style="display:inline-block;font-weight:normal;">
+                                        Tìm theo tên món ăn:
+                                        <input name="Search" type="search" value="@(ViewBag.Search as string)" class="form-control">
+                                    </label>
+                                    <label style="display:inline-block;font-weight:normal;">
+                                        <input style="margin-top:-4.4px" class="btn btn-info" type="submit" value="Tìm kiếm" />
+                                    </label>}
+
+                            </div>
+                            <div class="col-md-1">
+                                <br />
+                                <a href="@Url.Action("Index","Foods")" style="font-size: 14px;font-weight: normal;" class="badge badge-danger">RESET bộ lọc</a>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <p><br />Sắp xếp theo: @Html.ActionLink("Tên Món Ăn", "Index", new { sortFood = ViewBag.NameSortParm }) | @Html.ActionLink("Ngày tạo", "Index", new { sortFood = ViewBag.DateSortParm })</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="text-center with">
+                            <th>
+                                Tên Món Ăn
+                            </th>
+                            <th>
+                                Thể Loại
+                            </th>
+                            <th>
+                                Tên phương pháp nấu
+                            </th>
+
+                            <th>
+                                Ngày tạo
+                            </th>
+                            <th>
+                                User
+                            </th>
+                            <th>
+                                Chức Năng
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-center">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenMonAn)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryFood.TenTheLoai)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CookingMethod.TenPPN)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayTao)
+                                </td>
+                               
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.UserName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IDFood }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDFood })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                    <!-- Kết thúc -->
+                </table>
+                <br />
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+                    Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortFood = ViewBag.CurrentSort, size = ViewBag.currentSize }))
+
+            </div>
+        </div>
+
+    </section>
+</div>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
