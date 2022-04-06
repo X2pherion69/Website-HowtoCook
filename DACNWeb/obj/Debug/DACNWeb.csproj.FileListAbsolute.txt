@@ -1,0 +1,2 @@
+C:\Users\nguye\OneDrive\Máy tính\doan\Website-HowtoCook\DACNWeb\obj\Debug\DACNWeb.csproj.AssemblyReference.cache
+C:\Users\nguye\OneDrive\Máy tính\doan\Website-HowtoCook\DACNWeb\obj\Debug\DACNWeb.csproj.CoreCompileInputs.cache

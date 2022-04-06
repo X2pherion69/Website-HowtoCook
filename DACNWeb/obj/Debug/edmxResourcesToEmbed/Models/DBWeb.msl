@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DACNModelStoreContainer" CdmEntityContainer="DACNEntities">
+    <EntitySetMapping Name="CategoryFoods">
+      <EntityTypeMapping TypeName="DACNModel.CategoryFood">
+        <MappingFragment StoreEntitySet="CategoryFood">
+          <ScalarProperty Name="IDTheLoai" ColumnName="IDTheLoai" />
+          <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CookingMethods">
+      <EntityTypeMapping TypeName="DACNModel.CookingMethod">
+        <MappingFragment StoreEntitySet="CookingMethod">
+          <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+          <ScalarProperty Name="TenPPN" ColumnName="TenPPN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Details">
+      <EntityTypeMapping TypeName="DACNModel.Detail">
+        <MappingFragment StoreEntitySet="Detail">
+          <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+          <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Foods">
+      <EntityTypeMapping TypeName="DACNModel.Food">
+        <MappingFragment StoreEntitySet="Food">
+          <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+          <ScalarProperty Name="IDTheLoai" ColumnName="IDTheLoai" />
+          <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+          <ScalarProperty Name="TenMonAn" ColumnName="TenMonAn" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="ActiveTime" ColumnName="ActiveTime" />
+          <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+          <ScalarProperty Name="Yield" ColumnName="Yield" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materials">
+      <EntityTypeMapping TypeName="DACNModel.Material">
+        <MappingFragment StoreEntitySet="Material">
+          <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+          <ScalarProperty Name="TenNL" ColumnName="TenNL" />
+          <ScalarProperty Name="DonVi" ColumnName="DonVi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="DACNModel.Rating">
+        <MappingFragment StoreEntitySet="Rating">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+          <ScalarProperty Name="IDFood" ColumnName="IDFood" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Vote" ColumnName="Vote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DACNModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DACNModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
