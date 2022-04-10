@@ -17,5 +17,11 @@ namespace DACNWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Session_Start()
+        {
+            Session["UserAdmin"] = "";
+            Session["UserId"] = "";
+            Session["FullName"] = "";
+        }
     }
 }

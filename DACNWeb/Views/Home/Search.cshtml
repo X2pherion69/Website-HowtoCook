@@ -85,18 +85,7 @@
             <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
                 @Html.PagedListPager(Model, page => Url.Action("Search", new { page, sortFood = ViewBag.CurrentSort, size = ViewBag.currentSize }))
             </div>
-            <div class="uk-margin-large-top uk-text-small">
-                <ul class="uk-pagination uk-flex-center uk-text-500 uk-margin-remove" data-uk-margin>
-                    <li><a href="#"><span data-uk-pagination-previous></span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li class="uk-disabled"><span>...</span></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li class="uk-active"><span>7</span></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#"><span data-uk-pagination-next></span></a></li>
-                </ul>
-            </div>
+            
         </div>
     </div>
 
