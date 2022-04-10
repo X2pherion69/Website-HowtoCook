@@ -1,0 +1,35 @@
+﻿@model DACNWeb.Models.Material
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Material</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonVi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonVi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDNguyenLieu }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

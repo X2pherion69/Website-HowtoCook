@@ -1,0 +1,58 @@
+﻿@model DACNWeb.Models.CategoryFood
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <section class="content my-2">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong class="text-danger text-uppercase ">Delete</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <button class="btn btn-sm btn-danger" type="submit" name="Delete"><i class="fas fa-trash-alt"></i> Delete</button>
+                            <a href="@Url.Action("Index","CategoryFoods")" class="btn btn-sm btn-info"><i class="fas fa-arrow-left"></i>  Back</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên Thể Loại
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(model => model.TenTheLoai)
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

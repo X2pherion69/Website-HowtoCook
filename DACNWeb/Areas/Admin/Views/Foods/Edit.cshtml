@@ -1,0 +1,237 @@
+﻿@model DACNWeb.Models.Food
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+
+@using (Html.BeginForm("Edit", "Foods", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IDFood)
+    @Html.HiddenFor(model => model.UserID)
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content my-2">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong class="text-danger text-uppercase">Edit</strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn-sm btn-success" type="submit" name="create"><i class="fas fa-save"></i> Save</button>
+                            <a href="@Url.Action("Index","Foods")" class="btn btn-sm btn-info"><i class="fas fa-arrow-left"></i>  Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-5 ">
+                            @Html.Label("Tên Phương Pháp:", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.DropDownList("IDMethod", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDMethod, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-5">
+                            @Html.Label("Tên Thể Loại:", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.DropDownList("IDTheLoai", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDTheLoai, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.ActiveTime, htmlAttributes: new { @class = "control-label col-md-8" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.ActiveTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ActiveTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.TotalTime, htmlAttributes: new { @class = "control-label col-md-8" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.TotalTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TotalTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Yield, htmlAttributes: new { @class = "control-label col-md-8" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.Yield, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Yield, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    @*<div class="form-group">
+                        @Html.Label("Chọn nguyên liệu:", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            <div class="row">
+                                @foreach (var item in Model.arrayNL)
+                                {
+
+                                    <div class="col-md-3 form-check abc-checkbox abc-checkbox-primary">
+                                        <input type="checkbox" name="@item.TenNL" id="check-box-meterial" data-meterial="@item.IDNguyenLieu" value="@item.TenNL" />
+                                        <label>@item.TenNL</label>
+
+
+                                        <input type="number" name="@item.IDNguyenLieu"> </input>
+                                        <span>@item.DonVi</span>
+                                    </div>
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>*@
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label>Tên Món Ăn</label>
+                            @Html.EditorFor(model => model.TenMonAn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenMonAn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+
+                            <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" class="form-control-file" />
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-10" style="text-align:center">
+                            <img src="@Url.Content(Model.Image)" style="max-width:60%;text-align:center;margin:10px " id="previewImage" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Teaser ngắn của bài viết", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TieuDe, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Nội dung bài viết:", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+                @*<div class="card-footer">
+                        Footer
+                    </div>*@
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}
+<script>
+    var editor = CKEDITOR.replace('NoiDung',
+        {
+
+            width: '100%',
+            height: '450',
+        }
+    );
+
+
+    $("input[type='number']").change(function (e) {
+        var checkbox = document.querySelector(`input[type="checkbox"][data-meterial="${e.target.getAttribute('name')}"]`)
+        if (checkbox.checked) {
+            list.forEach((item, index) => {
+                var id = item.split("&")[0]
+                if (id === (checkbox.getAttribute("data-meterial"))) {
+                    list[index] = (checkbox.getAttribute("data-meterial") + "&" + e.target.value);
+                }
+            })
+        } else {
+            list = jQuery.grep(list, function (value) {
+                var id = value.split('&')[0]
+                return id != checkbox.getAttribute("data-meterial");
+            });
+        }
+
+        var listStr = "";
+
+        for (var i = 0; i < list.length; i++) {
+            if (i == list.length - 1) {
+                listStr = listStr.concat(list[i]);
+            } else {
+                listStr = listStr.concat(list[i]).concat("-");
+            }
+        }
+
+        document.getElementById("idHidden").value = listStr;
+    })
+    $("input[type='checkbox']").change(function (e) {
+        var checkbox = $(e.target);
+        var number = document.querySelector(`input[type="number"][name="${checkbox.attr('data-meterial')}"]`).value
+        var idMeterial = checkbox.attr("data-meterial");
+        if (this.checked) {
+            list.push(idMeterial + "&" + number);
+        } else {
+            list = jQuery.grep(list, function (value) {
+                var id = value.split('&')[0]
+                return id != idMeterial;
+            });
+        }
+
+        var listStr = "";
+
+        for (var i = 0; i < list.length; i++) {
+            if (i == list.length - 1) {
+                listStr = listStr.concat(list[i]);
+            } else {
+                listStr = listStr.concat(list[i]).concat("-");
+            }
+        }
+
+        document.getElementById("idHidden").value = listStr;
+    });
+
+</script>
+
+
+
+
+
+
+
