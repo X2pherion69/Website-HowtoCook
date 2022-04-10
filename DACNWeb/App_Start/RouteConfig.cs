@@ -14,6 +14,23 @@ namespace DACNWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "PhuongPhap",
+                url: "phuong-phap/{ID}",
+                defaults: new { controller = "Food", action = "Method", title = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "NguyenLieu",
+                url: "nguyen-lieu/{ID}",
+                defaults: new { controller = "Food", action = "Material", title = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Baiviet",
+                url: "bai-viet/{ID}",
+                defaults: new { controller = "Home", action = "Recipe", title = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

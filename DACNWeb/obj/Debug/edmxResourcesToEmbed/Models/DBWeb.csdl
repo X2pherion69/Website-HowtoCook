@@ -18,12 +18,12 @@
   </EntityType>
   <EntityType Name="Detail">
     <Key>
-      <PropertyRef Name="IDFood" />
       <PropertyRef Name="IDNguyenLieu" />
+      <PropertyRef Name="IDFood" />
     </Key>
-    <Property Name="IDFood" Type="Int32" Nullable="false" />
-    <Property Name="IDNguyenLieu" Type="Int32" Nullable="false" />
     <Property Name="SoLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDNguyenLieu" Type="Int32" Nullable="false" />
+    <Property Name="IDFood" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Food" Relationship="Self.FK_Detail_Food" FromRole="Detail" ToRole="Food" />
     <NavigationProperty Name="Material" Relationship="Self.FK_Detail_Material" FromRole="Detail" ToRole="Material" />
   </EntityType>
@@ -211,5 +211,16 @@
       <End Role="Role" EntitySet="Roles" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="DACNModel.sysdiagram" />
   </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>
